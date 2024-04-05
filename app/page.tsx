@@ -12,7 +12,7 @@ const Home: NextPage = () => {
     <div className=" aspect-square h-72 w-72 rounded-md bg-white p-4">
       <div>
         <div>
-          <QRCodeSVG value={`http://localhost:3000/result`} size={224}/>
+          <QRCodeSVG value={`http://localhost:3000/Result`} size={224}/>
         </div>
         <p className=" mt-8 text-center text-sm text-gray-500">QRコードをスキャン</p>
         <div className=" bg-white p-4 rounded-md">
