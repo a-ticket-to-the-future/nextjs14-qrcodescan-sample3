@@ -2,7 +2,7 @@ import Image from "next/image";
 import Timecard from "./component/timecard/QrReaderImage";
 import { NextPage } from "next";
 import { QRCodeSVG } from "qrcode.react"
-import QRCodeScanner from "./component/qrcodeScanner/QrcodeReader";
+import QRCodeScanner from "./component/qrcodeScanner/QRCodeScanner";
 import QrReaderImage from "./component/timecard/QrReaderImage";
 
 const Home: NextPage = () => {
