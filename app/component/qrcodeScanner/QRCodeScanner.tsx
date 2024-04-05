@@ -3,6 +3,9 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import jsQR from 'jsqr'
 import Link from 'next/link'
+// import { Result } from 'postcss'
+import Result from '@/app/Result/page'
+import { useRouter } from 'next/navigation'
 
 type Props = {}
 
@@ -19,6 +22,7 @@ const QRCodeScanner:FC<Props> = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [result, setResult] = useState('')
     const [error, setError] = useState('')
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -69,12 +73,14 @@ const QRCodeScanner:FC<Props> = () => {
           const qrCodeData = jsQR(imageData.data, imageData.width, imageData.height)
           if (qrCodeData) {
             //　スキャンされた内容を確認する
-            if (qrCodeData.data !== 'http://localhost:3000/result') {
+            if (qrCodeData.data !== 'http://localhost:3000/Result') {
               setError('対応していないQRコードです')
               setTimeout(scanQrCode, 100) //　スキャンの頻度を制限
               return
             }
+            console.log(qrCodeData.data)
             setResult(qrCodeData.data)
+            router.push(qrCodeData.data)
             return
 
           }
@@ -98,8 +104,9 @@ const QRCodeScanner:FC<Props> = () => {
       {result && (
         <div className='flex justify-center'>
           <Link href={result}>
-            <button>push</button>
+            <button className=' text-blue-600 border-blue-300'>push</button>
           </Link>
+          <Result />
         </div>
       )}
       {error && <p className=' text-center text-xs text-red-500'>{error}</p>}

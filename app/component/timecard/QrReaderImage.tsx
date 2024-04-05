@@ -45,7 +45,7 @@ const QrReaderImage: FC<Props> = () => {
                         }
 
                         //　スキャンされた内容の確認
-                        if( qrCodeData.data !== 'http://localhost:3000/result') {
+                        if( qrCodeData.data !== 'http://localhost:3000/Result/page') {
                             setResult(undefined)
                             setError('対応していないQRコードです')
                             return
