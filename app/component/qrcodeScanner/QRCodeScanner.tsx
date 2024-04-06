@@ -6,6 +6,10 @@ import Link from 'next/link'
 // import { Result } from 'postcss'
 import Result from '@/app/Result/page'
 import { useRouter } from 'next/navigation'
+/// <reference types="@types/howler" />
+
+import {Howl,Howler} from 'howler';
+// import from '../../../public/sound/scanComplete.mp3'
 
 type Props = {}
 
@@ -23,6 +27,9 @@ const QRCodeScanner:FC<Props> = () => {
     const [result, setResult] = useState('')
     const [error, setError] = useState('')
     const router = useRouter()
+    const [onSound,setOnSound] = useState(false)
+
+    
 
 
     useEffect(() => {
@@ -61,6 +68,12 @@ const QRCodeScanner:FC<Props> = () => {
     },[])
 
     const scanQrCode = () => {
+
+      const sound = new Howl({
+        src:['/sound/scanComplete.mp3'],
+      })
+      // setOnSound(sound)
+
       const canvas = canvasRef.current
       const video = videoRef.current
       if (canvas && video) {
@@ -81,10 +94,12 @@ const QRCodeScanner:FC<Props> = () => {
             console.log(qrCodeData.data)
             setResult(qrCodeData.data)
             router.push(qrCodeData.data)
+            sound.play()
             return
 
           }
-          setTimeout(scanQrCode, 100)
+          setTimeout(scanQrCode, 50)
+          // requestAnimationFrame(scanQrCode)
         }
       }
     }
